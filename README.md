@@ -1,0 +1,70 @@
+# Windows-style shortcuts: browser and Finder fixes (Karabiner-Elements)
+
+Three small rules that fix conflicts the popular PC-style shortcut sets leave behind on macOS.
+
+If you came from Windows and mapped <kbd>Alt</kbd> to <kbd>⌘</kbd>, you probably lost a few keys
+without noticing. These rules give them back.
+
+---
+
+## The problem
+
+| Symptom | Cause |
+| --- | --- |
+| <kbd>⌘D</kbd> stopped working everywhere — Finder Duplicate, Add bookmark | PC-style sets map `Alt+D` (address bar) **globally**, so every <kbd>⌘D</kbd> becomes <kbd>⌘L</kbd> |
+| <kbd>Alt+F4</kbd> does nothing in Finder | It maps to <kbd>⌘Q</kbd>, and Finder has no Quit |
+
+## The rules
+
+| Rule | Effect | Scope |
+| --- | --- | --- |
+| Address bar | <kbd>⌘D</kbd> → <kbd>⌘L</kbd> | browsers only |
+| Bookmark | <kbd>control+D</kbd> → <kbd>⌘D</kbd> | browsers only |
+| Finder close | <kbd>⌘F4</kbd> → <kbd>⌘W</kbd> | Finder only |
+
+Scoping the address-bar rule to browsers is the whole point of rule 1: <kbd>⌘D</kbd> keeps working
+everywhere else. Rule 2 then restores bookmarking with the Windows key, <kbd>Ctrl+D</kbd>.
+
+## Install
+
+One click (opens Karabiner-Elements):
+
+[Import into Karabiner-Elements](karabiner://karabiner/assets/complex_modifications/import?url=https%3A%2F%2Fraw.githubusercontent.com%2Frenovys%2Fkarabiner-windows-style-fixes%2Fmain%2Fwindows_style_browser_and_finder_fixes.json)
+
+Or manually:
+
+```shell
+curl -L -o ~/.config/karabiner/assets/complex_modifications/windows_style_browser_and_finder_fixes.json \
+  https://raw.githubusercontent.com/renovys/karabiner-windows-style-fixes/main/windows_style_browser_and_finder_fixes.json
+```
+
+Then enable the rules in *Karabiner-Elements → Complex Modifications → Add rule*.
+
+## Enable order does not matter
+
+Rules 1 and 2 both involve <kbd>D</kbd>, and Karabiner applies complex modifications **top to
+bottom, feeding each rule's output into the next**. A naive bookmark rule that emits
+`left_command + d` would be re-captured by the address-bar rule and open the address bar instead.
+
+Rule 2 emits `right_command` while rule 1 matches `left_command` only, so the pair is safe in
+either order. macOS treats both <kbd>⌘</kbd> keys the same, so <kbd>Ctrl+D</kbd> still bookmarks.
+
+## Browsers covered
+
+Safari, Chrome, Edge, Brave, Firefox (stable / developer / nightly), Whale.
+
+To add your own, find the bundle identifier and append it to the `bundle_identifiers` arrays:
+
+```shell
+osascript -e 'id of app "Vivaldi"'
+```
+
+## Also in the official gallery
+
+Submitted to the Karabiner-Elements complex modifications gallery as
+[pqrs-org/KE-complex_modifications#1989](https://github.com/pqrs-org/KE-complex_modifications/pull/1989).
+This repository is the standalone copy — the JSON is identical.
+
+## License
+
+Public domain ([Unlicense](LICENSE)), matching the gallery.
