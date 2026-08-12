@@ -42,14 +42,16 @@ Then enable the rules in *Karabiner-Elements → Complex Modifications → Add r
 
 ## Enable order does not matter
 
-Rules 1 and 2 both involve <kbd>D</kbd>, but they match different physical input modifiers:
-rule 1 matches `left_command + d`, while rule 2 matches `left_control + d`.
+Rules 1 and 2 both involve <kbd>D</kbd>, but they match different input modifiers:
+rule 1 matches `left_command + d`, while rule 2 matches `control + d` (either Control key).
 
-Karabiner-Elements evaluates complex manipulators from top to bottom against the input event and
-uses the first matching manipulator. An event already modified by Complex Modifications is not fed
-back through later complex rules, so rule 2's generated <kbd>⌘D</kbd> is not re-captured by rule 1.
-The current JSON emits `right_command + d`; macOS treats either Command key as <kbd>⌘</kbd>, but the
-right-side modifier is not required to prevent rule chaining.
+Karabiner-Elements evaluates complex manipulators from top to bottom, and
+["the input event is manipulated only the first matched manipulator"][priority]. A
+<kbd>Ctrl+D</kbd> press is therefore handled by rule 2 alone; rule 1 never sees it, whatever the
+enable order. The current JSON emits `right_command + d`; macOS treats either Command key as
+<kbd>⌘</kbd>, and the right-side modifier is not what keeps the two rules apart.
+
+[priority]: https://karabiner-elements.pqrs.org/docs/json/complex-modifications-manipulator-evaluation-priority/
 
 ## Browsers covered
 
