@@ -42,12 +42,14 @@ Then enable the rules in *Karabiner-Elements → Complex Modifications → Add r
 
 ## Enable order does not matter
 
-Rules 1 and 2 both involve <kbd>D</kbd>, and Karabiner applies complex modifications **top to
-bottom, feeding each rule's output into the next**. A naive bookmark rule that emits
-`left_command + d` would be re-captured by the address-bar rule and open the address bar instead.
+Rules 1 and 2 both involve <kbd>D</kbd>, but they match different physical input modifiers:
+rule 1 matches `left_command + d`, while rule 2 matches `left_control + d`.
 
-Rule 2 emits `right_command` while rule 1 matches `left_command` only, so the pair is safe in
-either order. macOS treats both <kbd>⌘</kbd> keys the same, so <kbd>Ctrl+D</kbd> still bookmarks.
+Karabiner-Elements evaluates complex manipulators from top to bottom against the input event and
+uses the first matching manipulator. An event already modified by Complex Modifications is not fed
+back through later complex rules, so rule 2's generated <kbd>⌘D</kbd> is not re-captured by rule 1.
+The current JSON emits `right_command + d`; macOS treats either Command key as <kbd>⌘</kbd>, but the
+right-side modifier is not required to prevent rule chaining.
 
 ## Browsers covered
 
