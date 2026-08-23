@@ -67,7 +67,10 @@ osascript -e 'id of app "Vivaldi"'
 
 Submitted to the Karabiner-Elements complex modifications gallery as
 [pqrs-org/KE-complex_modifications#1989](https://github.com/pqrs-org/KE-complex_modifications/pull/1989).
-This repository is the standalone copy — the JSON is identical.
+This repository is the standalone copy, and it has since moved ahead of that submission: the gallery
+version matches any modifier (`"optional": ["any"]`), which lets rule 1 also capture <kbd>⌘⇧D</kbd>
+("Bookmark all tabs" in Chrome) and <kbd>⌃⌘D</kbd> (Look Up). This copy matches modifiers exactly and
+allows only <kbd>fn</kbd> and Caps Lock, so those shortcuts keep working.
 
 ## License
 

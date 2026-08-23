@@ -1,9 +1,9 @@
 {
-    "title": "Windows-style shortcuts: browser and Finder fixes (rev 1)",
+    "title": "Windows-style shortcuts: browser and Finder fixes (rev 2)",
     "maintainers": ["renovys"],
     "rules": [
         {
-            "description": "Address bar: ⌘D to ⌘L, in browsers only (Windows Alt+D). Enable this BEFORE the Ctrl+D bookmark rule below. (rev 1)",
+            "description": "Address bar: ⌘D to ⌘L, in browsers only (Windows Alt+D). Exact modifier match; rule order does not matter. (rev 2)",
             "manipulators": [
                 {
                     "type": "basic",
@@ -26,7 +26,7 @@
                         "key_code": "d",
                         "modifiers": {
                             "mandatory": ["left_command"],
-                            "optional": ["any"]
+                            "optional": ["caps_lock"]
                         }
                     },
                     "to": [
@@ -39,7 +39,7 @@
             ]
         },
         {
-            "description": "Bookmark: control+D to ⌘D, in browsers (Windows Ctrl+D). Safe to combine with the ⌘D address bar rule above. (rev 1)",
+            "description": "Bookmark: control+D to ⌘D, in browsers (Windows Ctrl+D). Exact modifier match. (rev 2)",
             "manipulators": [
                 {
                     "type": "basic",
@@ -62,7 +62,7 @@
                         "key_code": "d",
                         "modifiers": {
                             "mandatory": ["control"],
-                            "optional": ["any"]
+                            "optional": ["caps_lock"]
                         }
                     },
                     "to": [
@@ -75,7 +75,7 @@
             ]
         },
         {
-            "description": "Finder: ⌘F4 closes the window instead of doing nothing (Windows Alt+F4). Finder has no Quit, so ⌘Q is a no-op there. (rev 1)",
+            "description": "Finder: ⌘F4 closes the window instead of doing nothing (Windows Alt+F4). Exact modifier match. Finder has no Quit, so ⌘Q is a no-op there. (rev 2)",
             "manipulators": [
                 {
                     "type": "basic",
@@ -89,7 +89,7 @@
                         "key_code": "f4",
                         "modifiers": {
                             "mandatory": ["command"],
-                            "optional": ["any"]
+                            "optional": ["fn", "caps_lock"]
                         }
                     },
                     "to": [
